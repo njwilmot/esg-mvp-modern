@@ -1,0 +1,50 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ESGMetric {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  companyName    String
+  carbonEmissions Float
+  energyUsage    Float
+  wasteProduced  Float
+}
+
+model Recommendation {
+  id       Int      @id @default(autoincrement())
+  companyName String
+  text     String
+  createdAt DateTime @default(now())
+}
+
+model Supplier {
+  id         Int    @id @default(autoincrement())
+  name       String
+  esgRating  String?
+  verified   Boolean @default(false)
+  // Additional fields like certificationDocuments, etc.
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+}
+model Job {
+  id             Int      @id @default(autoincrement())
+  company        String
+  role           String
+  neighborhood   String
+  description    String
+  homePrice      String
+  crimeRate      String
+  educationScore Int
+  createdAt      DateTime @default(now())
+}

@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "Recommendation" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "companyName" TEXT NOT NULL,
+    "text" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

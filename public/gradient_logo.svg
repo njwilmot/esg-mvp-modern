@@ -1,0 +1,33 @@
+<svg width="500px" height="200px" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background gradient: subtle dark tones -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1C1C1C" />
+      <stop offset="100%" stop-color="#111111" />
+    </linearGradient>
+
+    <!-- Text gradient: warm, vibrant colors -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF7E5F" />
+      <stop offset="100%" stop-color="#FEB47B" />
+    </linearGradient>
+  </defs>
+
+ ]
+  <!-- Subtle geometric element behind the text: a semi-transparent circle -->
+  <circle cx="50%" cy="50%" r="70"
+          fill="rgba(255,255,255,0.05)"
+          style="mix-blend-mode: screen;" />
+
+  <!-- Main Logo Text -->
+  <text x="50%" y="50%"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="Roboto, Arial, sans-serif"
+        font-weight="500"
+        font-size="60"
+        fill="url(#textGradient)"
+        letter-spacing="1">
+    GRADIENT
+  </text>
+</svg>

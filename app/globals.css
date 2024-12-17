@@ -2,20 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-background: #0e1117;
+  --color-foreground: #f5f7fa;
+  --color-sidebar: #151a21;
+  --color-header: #0e1117;
+  --color-accent: #58a6ff;
+  --color-accent-hover: #1f6feb;
+  --color-card-bg: #1c2128;
+  --color-border: #30363d;
+  --color-scrollbar-bg: #21262d;
+  --color-scrollbar-thumb: #484f58;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base body styling */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply text-sm text-gray-200 bg-gray-900 font-sans;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: 5px;
+}
+
+/* Links */
+a {
+  color: var(--color-foreground);
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--color-accent);
+}
+
+/* Buttons */
+button {
+  @apply inline-flex items-center px-4 py-2 rounded-md font-semibold;
+  background-color: var(--color-accent);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+button:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-weight: 700;
+  color: #fff;
+}
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+
+/* Utility classes */
+.header-shadow {
+  box-shadow: 0 1px 0 var(--color-border);
 }
