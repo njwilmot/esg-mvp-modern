@@ -15,6 +15,7 @@
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "next": "15.1.0",
+    "next-auth": "^4.24.11",
     "pdfkit": "^0.15.1",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
@@ -34,8 +35,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
-"prisma": {
-  "seed": "node --loader ts-node/esm prisma/seed.ts"
-}
-
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  }
 }

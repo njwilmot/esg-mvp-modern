@@ -1,92 +1,144 @@
-'use client';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { useEffect, useState, useRef } from 'react';
-
-interface Job {
-  id: number;
-  company: string;
-  role: string;
-  neighborhood: string;
-  description: string;
-  homePrice: string;
-  crimeRate: string;
-  educationScore: number;
-}
-
-export default function HomePage() {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [nextCursor, setNextCursor] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
-
-  async function fetchJobs(cursor?: number) {
-    setLoading(true);
-    const url = cursor ? `/api/jobs?take=5&cursor=${cursor}` : `/api/jobs?take=5`;
-    const res = await fetch(url);
-  
-    if (!res.ok) {
-      console.error('Failed to fetch jobs:', res.status, await res.text());
-      setLoading(false);
-      return;
-    }
-  
-    const data = await res.json();
-    console.log('API Data:', data); // <-- Log the fetched data here
-  
-    setJobs((prev) => [...prev, ...data.jobs]);
-    setNextCursor(data.nextCursor);
-    setLoading(false);
-  }
-  
-
-  useEffect(() => {
-    // Initial fetch
-    fetchJobs();
-  }, []);
-
-  useEffect(() => {
-    if (!loadMoreRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const first = entries[0];
-        if (first.isIntersecting && !loading && nextCursor !== null) {
-          fetchJobs(nextCursor);
-        }
-      },
-      { threshold: 1 }
-    );
-
-    observer.observe(loadMoreRef.current);
-    return () => observer.disconnect();
-  }, [loading, nextCursor]);
-
+export default function FeaturesPage() {
   return (
-    <div className="flex flex-col h-full overflow-auto p-6 space-y-6">
-      <h1 className="text-3xl font-extrabold">Discover Top Jobs in Vibrant Neighborhoods</h1>
-      <p className="text-gray-400 max-w-2xl">
-        Explore a curated list of opportunities from leading companies. Compare home prices, crime rates, and other factors that matter.
-      </p>
-
-      <div className="space-y-4">
-        {jobs.map((job) => (
-          <div key={job.id} className="card flex flex-col md:flex-row md:items-center md:justify-between p-4">
-            <div className="mb-4 md:mb-0">
-              <h2 className="text-xl font-bold">{job.company} - {job.role}</h2>
-              <p className="text-gray-300 mt-1">{job.neighborhood}</p>
-              <p className="text-gray-400 mt-2">{job.description}</p>
-            </div>
-            <div className="flex flex-col text-gray-200 space-y-1 md:text-right md:items-end">
-              <span><strong>Home Price:</strong> {job.homePrice}</span>
-              <span><strong>Crime Rate:</strong> {job.crimeRate}</span>
-              <span><strong>Education Score:</strong> {job.educationScore}/10</span>
-            </div>
-          </div>
-        ))}
+    <div className="container mx-auto px-6 py-12 space-y-16">
+      {/* Hero Section */}
+      <div className="text-center space-y-6">
+        <h1 className="text-4xl font-bold text-white">
+          Powerful Features for Lead Management
+        </h1>
+        <p className="text-lg text-gray-400">
+          Voyager offers everything you need to streamline your workflows, 
+          connect with leads, and grow your business.
+        </p>
+        <div className="space-x-4">
+          <Link
+            href="/signup"
+            className="bg-accent text-white px-6 py-3 rounded-md hover:bg-accent-light"
+          >
+            Get Started
+          </Link>
+          <Link
+            href="/demos"
+            className="border border-accent text-accent px-6 py-3 rounded-md hover:bg-gray-700"
+          >
+            Watch Demos
+          </Link>
+        </div>
       </div>
 
-      {loading && <div className="text-gray-400 text-center mt-4">Loading more opportunities...</div>}
-      <div ref={loadMoreRef} className="h-12"></div>
+      {/* About Voyager Section */}
+      <div className="bg-gray-800 py-12 px-6 rounded-lg shadow-lg space-y-6">
+        <h2 className="text-3xl font-bold text-center text-white">About Voyager</h2>
+        <p className="text-lg text-gray-400 text-center max-w-3xl mx-auto">
+          Voyager is a state-of-the-art lead management platform designed to empower businesses of all sizes. 
+          Our mission is to simplify the way companies connect with potential customers, optimize their workflows, 
+          and make data-driven decisions with confidence. From advanced analytics to automated communication, 
+          Voyager is your trusted partner for scaling success in a competitive market.
+        </p>
+        <div className="flex justify-center items-center space-x-8">
+          <div className="text-center">
+            <Image
+              src="/images/global-reach.png"
+              alt="Global Reach"
+              width={150}
+              height={150}
+              className="mx-auto"
+            />
+            <h3 className="text-xl font-bold text-white mt-4">Global Reach</h3>
+            <p className="text-gray-400">
+              Trusted by businesses in over 50 countries.
+            </p>
+          </div>
+          <div className="text-center">
+            <Image
+              src="/images/ai-powered.png"
+              alt="AI-Powered"
+              width={150}
+              height={150}
+              className="mx-auto"
+            />
+            <h3 className="text-xl font-bold text-white mt-4">AI-Powered Insights</h3>
+            <p className="text-gray-400">
+              Advanced tools that help you make smarter decisions.
+            </p>
+          </div>
+          <div className="text-center">
+            <Image
+              src="/images/customer-success.png"
+              alt="Customer Success"
+              width={150}
+              height={150}
+              className="mx-auto"
+            />
+            <h3 className="text-xl font-bold text-white mt-4">Customer Success</h3>
+            <p className="text-gray-400">
+              Dedicated support to ensure your business thrives.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Features Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="text-center space-y-4">
+          <Image
+            src="/feature3.png" // Replace with your feature image
+            alt="Feature 1"
+            width={800}
+            height={300}
+            className="rounded-lg shadow-lg"
+          />
+          <h3 className="text-xl font-bold text-white">Lead Scoring</h3>
+          <p className="text-gray-400">
+            Prioritize leads with advanced scoring algorithms to focus on what matters most.
+          </p>
+        </div>
+        <div className="text-center space-y-4">
+          <Image
+            src="/feature1.png" // Replace with your feature image
+            alt="Feature 2"
+            width={800}
+            height={300}
+            className="rounded-lg shadow-lg"
+          />
+          <h3 className="text-xl font-bold text-white">Automated Follow-Ups</h3>
+          <p className="text-gray-400">
+            Save time with automated email and task reminders for seamless communication.
+          </p>
+        </div>
+        <div className="text-center space-y-4">
+          <Image
+            src="/feature2.png" // Replace with your feature image
+            alt="Feature 3"
+            width={800}
+            height={300}
+            className="rounded-lg shadow-lg"
+          />
+          <h3 className="text-xl font-bold text-white">Detailed Analytics</h3>
+          <p className="text-gray-400">
+            Track your progress with real-time dashboards and insightful reports.
+          </p>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-gray-900 py-12 text-center rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-white">
+          Ready to Supercharge Your Workflow?
+        </h2>
+        <p className="text-gray-400 mt-2">
+          Join thousands of businesses using Voyager to achieve their goals.
+        </p>
+        <Link
+          href="/signup"
+          className="mt-6 bg-accent text-white px-6 py-3 rounded-md hover:bg-accent-light"
+        >
+          Get Started for Free
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+// app/layout.tsx
 import './globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,97 +8,89 @@ export const metadata = {
   title: 'Voyager',
   description: 'Simplifying your move with data-driven tools and insights.',
   icons: {
-    icon: '/cheese.ico',
+    icon: '/favicon.ico',
   },
 };
 
-function Sidebar() {
+function TopNavigation() {
   return (
-    <aside className="hidden md:flex md:flex-col w-64 bg-sidebar border-r border-color-border h-screen">
-      <div className="p-6 border-b border-color-border">
-        <h2 className="text-lg font-bold">Navigation</h2>
+    <header className="bg-gray-900 text-gray-300">
+      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+        {/* Logo (Wrapped in Link) */}
+        <Link href="/" className="flex items-center space-x-4">
+          <Image
+            src="/home2.png" // Replace with your logo path
+            alt="Voyager Logo"
+            width={40}
+            height={40}
+          />
+          <span className="text-xl font-bold text-white">Voyager</span>
+        </Link>
+
+        {/* Navigation Links */}
+        <nav className="hidden md:flex space-x-8">
+          <Link href="/" className="hover:text-accent transition-colors">
+            Home
+          </Link>
+          <Link href="/leads" className="hover:text-accent transition-colors">
+            Leads
+          </Link>
+          <Link href="/features" className="hover:text-accent transition-colors">
+            Features
+          </Link>
+          <Link href="/pricing" className="hover:text-accent transition-colors">
+            Pricing
+          </Link>
+          <Link href="/about" className="hover:text-accent transition-colors">
+            About Us
+          </Link>
+        </nav>
+
+        {/* Actions */}
+        <div className="flex items-center space-x-4">
+          <Link href="/login" className="hover:text-accent transition-colors">
+            Login
+          </Link>
+          <Link
+            href="/signup"
+            className="bg-accent text-white px-4 py-2 rounded-md hover:bg-accent-light transition-colors"
+          >
+            Try for Free
+          </Link>
+        </div>
       </div>
-      <nav className="flex-1 overflow-auto p-6 space-y-4">
-        <Link href="/" className="block hover:text-accent">
-          🏠 Home
-        </Link>
-        <Link href="/explore" className="block hover:text-accent">
-          🔍 Explore
-        </Link>
-        <Link href="/checklist" className="block hover:text-accent">
-          ✅ Checklist
-        </Link>
-        <Link href="/community" className="block hover:text-accent">
-          💬 Community
-        </Link>
-      </nav>
-    </aside>
+    </header>
   );
 }
 
-function RightPanel() {
+function Footer() {
   return (
-    <aside className="hidden lg:flex lg:flex-col w-64 bg-sidebar border-l border-color-border h-screen">
-      <div className="p-6 border-b border-color-border">
-        <h2 className="text-md font-bold mb-2">Top Cities</h2>
-        <ul className="text-sm space-y-1">
-          <li>📍 San Francisco</li>
-          <li>📍 New York</li>
-          <li>📍 Austin</li>
-        </ul>
+    <footer className="bg-gray-900 text-gray-400 py-8">
+      <div className="container mx-auto text-center">
+        <p>© {new Date().getFullYear()} Voyager. All rights reserved.</p>
+        <div className="flex justify-center space-x-6 mt-4">
+          <Link href="/privacy-policy" className="hover:underline">
+            Privacy Policy
+          </Link>
+          <Link href="/terms-of-service" className="hover:underline">
+            Terms of Service
+          </Link>
+          <Link href="/contact" className="hover:underline">
+            Contact Us
+          </Link>
+        </div>
       </div>
-      <div className="p-6 overflow-auto">
-        <h2 className="text-md font-bold mb-2">Recent Activity</h2>
-        <ul className="space-y-2 text-sm">
-          <li>John commented on Austin Insights.</li>
-          <li>Jane added a checklist item.</li>
-          <li>Mark explored New York.</li>
-        </ul>
-      </div>
-    </aside>
+    </footer>
   );
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="h-full">
-      <body className="h-full flex flex-row overflow-hidden">
-        {/* Sidebar */}
-        <Sidebar />
-
-        {/* Main Section */}
-        <div className="flex flex-col flex-1 h-full overflow-hidden">
-          {/* Header */}
-          <header className="flex items-center justify-between px-4 h-16 bg-header header-shadow">
-            <div className="flex items-center space-x-4">
-              <Link href="/">
-                <Image src="/logo.png" alt="Voyager Logo" width={30} height={30} />
-              </Link>
-              <Link href="/" className="text-xl font-bold hover:text-accent transition-colors">
-                Voyager
-              </Link>
-            </div>
-            <nav className="hidden md:block space-x-6 text-sm font-medium">
-              <Link href="/explore" className="hover:text-accent transition-colors">Explore</Link>
-              <Link href="/checklist" className="hover:text-accent transition-colors">Checklist</Link>
-              <Link href="/community" className="hover:text-accent transition-colors">Community</Link>
-            </nav>
-          </header>
-
-          {/* Main Content with scroll */}
-          <main className="flex-1 overflow-auto relative">
-            {children}
-          </main>
-
-          {/* Footer */}
-          <footer className="bg-header text-gray-400 px-6 py-4 text-sm flex justify-between items-center border-t border-color-border">
-            <p>© {new Date().getFullYear()} Voyager. All rights reserved.</p>
-            <p>Your guide to navigating new beginnings.</p>
-          </footer>
-        </div>
-
-        {/* Right Panel */}
-        <RightPanel />
+      <body className="flex flex-col bg-gray-800 text-gray-300">
+        <TopNavigation />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );
