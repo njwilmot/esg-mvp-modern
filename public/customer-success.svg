@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" width="120" height="80">
+  <!-- Supportive Hands -->
+  <path d="M30 60 Q40 40 60 40 Q80 40 90 60" fill="none" stroke="#4299E1" stroke-width="2" />
+  <!-- Customer Icon -->
+  <circle cx="60" cy="30" r="10" fill="#4299E1" />
+  <path d="M50 35 Q60 50 70 35" fill="none" stroke="#4299E1" stroke-width="2" />
+</svg>

@@ -53,10 +53,13 @@ model Lead {
   name      String
   email     String
   phone     String?
-  status    String   @default("new") // Could be 'new', 'contacted', 'converted'
+  status    String   @default("new")
+  source    String?  // Social Media, Website, etc.
+  score     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
 model UserSettings {
   userId            String  @id
   emailNotifications Boolean @default(false)
@@ -120,3 +123,22 @@ model Subscription {
   createdAt DateTime @default(now())
 }
 
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  timestamp DateTime @default(now())
+}
+
+model Workflow {
+  id    String         @id @default(uuid())
+  name  String
+  steps WorkflowStep[]
+}
+
+model WorkflowStep {
+  id        String @id @default(uuid())
+  action    String
+  params    String
+  workflow  Workflow @relation(fields: [workflowId], references: [id])
+  workflowId String
+}

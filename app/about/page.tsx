@@ -7,38 +7,29 @@ export default function AboutPage() {
       <div className="text-center space-y-6">
         <h1 className="text-4xl font-bold text-white">About Voyager</h1>
         <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-          Voyager is at the forefront of the rapidly growing lead generation software industry. 
-          Our mission is to empower businesses with cutting-edge tools that streamline workflows, 
-          automate customer acquisition, and provide actionable insights for data-driven decisions.
+          Voyager is a bold and dynamic startup, redefining the lead generation software industry. 
+          Our mission is to empower businesses with tools that simplify workflows, automate processes, 
+          and provide actionable insights for smarter decisions.
         </p>
       </div>
 
-      {/* Our Approach Section */}
+      {/* Startup Journey Section */}
       <div className="bg-gray-900 py-12 px-6 rounded-lg shadow-lg space-y-6">
-        <h2 className="text-3xl font-bold text-white text-center">Our Unique Approach</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">Cutting-Edge Technology</h3>
-            <p className="text-gray-400">
-              We leverage the latest technology, including AI and machine learning, to provide smart insights and automated processes. Our tools ensure businesses can optimize marketing strategies and improve conversion rates effortlessly.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">User-Centric Design</h3>
-            <p className="text-gray-400">
-              Voyager focuses on providing an intuitive and user-friendly experience, enabling businesses to adopt our tools with ease and focus on what matters most—growing their customer base.
-            </p>
-          </div>
-        </div>
+        <h2 className="text-3xl font-bold text-white text-center">Our Startup Journey</h2>
+        <p className="text-gray-400 max-w-3xl mx-auto text-center">
+          Founded with the vision of creating a smarter, more connected way to manage leads, Voyager is 
+          the result of a passion for innovation and a deep understanding of the challenges faced by startups. 
+          We’re proud to be building a platform that grows with your business.
+        </p>
       </div>
 
       {/* Callout Section */}
       <div className="bg-gray-800 py-12 text-center rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-white">
-          Ready to Transform Your Business?
+          Ready to Grow with Voyager?
         </h2>
         <p className="text-gray-400 mt-2">
-          Join the thousands of businesses using Voyager to simplify lead generation, enhance customer engagement, and drive growth.
+          Whether you’re a budding startup or an established business, Voyager is designed to scale with your needs.
         </p>
       </div>
     </div>

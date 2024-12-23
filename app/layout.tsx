@@ -8,52 +8,43 @@ export const metadata = {
   title: 'Voyager',
   description: 'Simplifying your move with data-driven tools and insights.',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/log.png',
   },
 };
 
 function TopNavigation() {
   return (
-    <header className="bg-gray-900 text-gray-300">
+    <header className="bg-grey text-black border-b border-gray-200 shadow-md">
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
-        {/* Logo (Wrapped in Link) */}
+        {/* Logo */}
         <Link href="/" className="flex items-center space-x-4">
-          <Image
-            src="/home2.png" // Replace with your logo path
-            alt="Voyager Logo"
-            width={40}
-            height={40}
-          />
-          <span className="text-xl font-bold text-white">Voyager</span>
+        <span className="text-white text-xl font-bold">Voyager</span>
         </Link>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex space-x-8">
-          <Link href="/" className="hover:text-accent transition-colors">
-            Home
-          </Link>
-          <Link href="/leads" className="hover:text-accent transition-colors">
+        <nav className="hidden md:flex space-x-8 font-semibold">
+          <Link href="/leads" className="hover:text-dark-blue transition-colors">
             Leads
           </Link>
-          <Link href="/features" className="hover:text-accent transition-colors">
+          <Link href="/features" className="hover:text-dark-blue transition-colors">
             Features
           </Link>
-          <Link href="/pricing" className="hover:text-accent transition-colors">
+          <Link href="/pricing" className="hover:text-dark-blue transition-colors">
             Pricing
           </Link>
-          <Link href="/about" className="hover:text-accent transition-colors">
+          <Link href="/about" className="hover:text-dark-blue transition-colors">
             About Us
           </Link>
         </nav>
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
-          <Link href="/login" className="hover:text-accent transition-colors">
+          <Link href="/login" className="hover:text-dark-blue font-semibold transition-colors">
             Login
           </Link>
           <Link
             href="/signup"
-            className="bg-accent text-white px-4 py-2 rounded-md hover:bg-accent-light transition-colors"
+            className="bg-dark-blue text-white px-5 py-2 rounded-lg font-semibold shadow hover:bg-dark-blue-hover transition-colors"
           >
             Try for Free
           </Link>

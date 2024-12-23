@@ -3,31 +3,63 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.job.createMany({
+  console.log("Start seeding...");
+
+  await prisma.lead.createMany({
     data: [
       {
-        company: 'Google',
-        role: 'Senior Software Engineer',
-        neighborhood: 'Mission District, San Francisco',
-        description: 'Work on cutting-edge AI features in a vibrant cultural hub.',
-        homePrice: '$1,200,000',
-        crimeRate: 'Medium',
-        educationScore: 8,
+        name: "John Doe",
+        email: "john.doe@example.com",
+        phone: "555-1234",
+        status: "new",
+        source: "Website",
+        score: 10,
       },
       {
-        company: 'Amazon',
-        role: 'Data Scientist',
-        neighborhood: 'Capitol Hill, Seattle',
-        description: 'Join a dynamic analytics team in a lively neighborhood.',
-        homePrice: '$850,000',
-        crimeRate: 'Low',
-        educationScore: 9,
+        name: "Jane Smith",
+        email: "jane.smith@example.com",
+        phone: "555-5678",
+        status: "in-progress",
+        source: "Social Media",
+        score: 25,
+      },
+      {
+        name: "Bob Johnson",
+        email: "bob.johnson@example.com",
+        phone: "555-8765",
+        status: "closed",
+        source: "Referral",
+        score: 50,
+      },
+      {
+        name: "Alice Brown",
+        email: "alice.brown@example.com",
+        phone: "555-4321",
+        status: "new",
+        source: "Email Campaign",
+        score: 15,
+      },
+      {
+        name: "Charlie Wilson",
+        email: "charlie.wilson@example.com",
+        phone: "555-6789",
+        status: "in-progress",
+        source: "Website",
+        score: 30,
       },
     ],
   });
+
+  console.log("Seeding finished!");
 }
 
 main()
-  .then(() => console.log('Database seeded'))
-  .catch((e) => console.error(e))
-  .finally(() => prisma.$disconnect());
+  .then(() => {
+    console.log("Seeding completed successfully.");
+    prisma.$disconnect();
+  })
+  .catch((e) => {
+    console.error("Error during seeding:", e);
+    prisma.$disconnect();
+    process.exit(1);
+  });

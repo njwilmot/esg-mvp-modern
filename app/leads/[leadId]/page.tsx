@@ -1,30 +1,39 @@
-// app/leads/[leadId]/page.tsx
-import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
+import { GetServerSideProps } from 'next';
+import prisma  from '@prisma/client'; // Ensure prisma client is exported properly
+import { Lead } from '@prisma/client';
+import React from 'react';
 
 type LeadPageProps = {
-  params: {
-    leadId: string; // This is a string (UUID)
-  };
+  lead: Lead;
 };
 
-export default async function LeadPage({ params }: LeadPageProps) {
-  const leadId = params.leadId; // Keep it as a string
+const LeadPage: React.FC<LeadPageProps> = ({ lead }) => {
+  return (
+    <div className="container mx-auto px-6 py-12 space-y-6">
+      <h1 className="text-3xl font-bold">{lead.name}</h1>
+      <p>Email: {lead.email}</p>
+      <p>Phone: {lead.phone || 'N/A'}</p>
+      <p>Status: {lead.status}</p>
+      <p>Score: {lead.score}</p>
+      <p>Created: {new Date(lead.createdAt).toLocaleDateString()}</p>
+      <p>Updated: {new Date(lead.updatedAt).toLocaleDateString()}</p>
+    </div>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { leadId } = context.params!;
   const lead = await prisma.lead.findUnique({
-    where: { id: leadId },
+    where: { id: leadId as string },
   });
 
   if (!lead) {
-    notFound();
+    return { notFound: true };
   }
 
-  return (
-    <div className="container mx-auto px-6 py-12 space-y-6 text-gray-300">
-      <h1 className="text-3xl font-bold text-white">{lead.name}</h1>
-      <p>Email: {lead.email}</p>
-      <p>Phone: {lead.phone || "N/A"}</p>
-      <p>Status: {lead.status}</p>
-      <p>Created: {lead.createdAt.toDateString()}</p>
-    </div>
-  );
-}
+  return {
+    props: { lead },
+  };
+};
+
+export default LeadPage;
